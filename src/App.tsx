@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useMemo, useState } from "react";
+import { sessions } from "./data/mock";
+import Filters from "./components/Filters";
+import KpiCards from "./components/KpiCards";
+import TripsChart from "./components/TripsChart";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [vehicle, setVehicle] = useState("All");
+
+  const filtered = useMemo(
+    () => (vehicle === "All" ? sessions : sessions.filter((s) => s.vehicle === vehicle)),
+    [vehicle]
+  );
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div style={{ maxWidth: 1100, margin: "0 auto", padding: 20, fontFamily: "system-ui, Arial" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+        <div>
+          <div style={{ fontSize: 26, fontWeight: 900 }}>EV Analytics Dashboard</div>
+          <div style={{ opacity: 0.75, marginTop: 4 }}>React + TypeScript + ECharts • KPI + Charts</div>
+        </div>
+        <Filters vehicle={vehicle} setVehicle={setVehicle} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
 
-export default App
+      <div style={{ marginTop: 16 }}>
+        <KpiCards data={filtered} />
+      </div>
+
+      <div style={{ marginTop: 16 }}>
+        <TripsChart data={filtered} />
+      </div>
+    </div>
+  );
+}

@@ -10,9 +10,12 @@ Interactive analytics dashboard for EV trip metrics (miles, energy usage, effici
 
 ## Planned Features (MVP)
 - KPI cards (total miles, energy, efficiency, cost)
-- Interactive charts (trend + breakdown)
+
+- Interactive charts (trends + breakdowns)
+
 - Filters (vehicle, date range)
 - Sortable table view
 
 ## Why this project
-Built to practice building scalable, responsive, data-heavy UI experiences similar to enterprise analytics platforms.
+
+Built to practice building scalable, responsive data-heavy UI experiences similar to enterprise analytics platforms.
